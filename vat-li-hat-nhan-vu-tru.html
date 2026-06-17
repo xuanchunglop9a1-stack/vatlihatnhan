@@ -1,0 +1,2465 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vật Lí Hạt Nhân Và Các Hiện Tượng</title>
+  <meta name="description" content="Website học tập về vật lí hạt nhân, phóng xạ, phản ứng hạt nhân, ứng dụng, an toàn bức xạ và câu hỏi trắc nghiệm.">
+  <style>
+:root {
+  --bg: #f7faf9;
+  --paper: #ffffff;
+  --ink: #16201f;
+  --muted: #65726f;
+  --line: #dce7e2;
+  --teal: #027c7c;
+  --teal-dark: #005b60;
+  --mint: #b7f0dd;
+  --gold: #f7b733;
+  --amber: #f4d35e;
+  --coral: #ef6351;
+  --rose: #c8465c;
+  --violet: #6d5dfc;
+  --blue: #2868c7;
+  --green: #2d9d78;
+  --shadow: 0 18px 50px rgba(20, 44, 42, 0.12);
+  --radius: 8px;
+  --max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+canvas {
+  display: block;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  min-height: 74px;
+  padding: 12px clamp(18px, 4vw, 56px);
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid rgba(220, 231, 226, 0.8);
+  backdrop-filter: blur(16px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 210px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #fff;
+  font-weight: 800;
+  background: conic-gradient(from 180deg, var(--teal), var(--gold), var(--coral), var(--teal));
+  border-radius: 50%;
+  box-shadow: 0 8px 18px rgba(2, 124, 124, 0.24);
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand strong {
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.brand small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.main-nav a {
+  padding: 9px 12px;
+  color: #33413e;
+  font-size: 14px;
+  border-radius: 999px;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--teal-dark);
+  background: #e8f7f2;
+}
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 9px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  margin: 5px 0;
+  background: var(--ink);
+}
+
+.section-band,
+.section {
+  padding: clamp(64px, 8vw, 112px) clamp(18px, 4vw, 56px);
+}
+
+.section-light {
+  background: var(--bg);
+}
+
+.section-ink {
+  color: #f9fffd;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(247, 183, 51, 0.22), transparent 26%),
+    linear-gradient(135deg, #14201f, #174d4d 55%, #231f42);
+}
+
+.hero {
+  min-height: calc(100vh - 74px);
+  padding-top: clamp(36px, 5vw, 74px);
+  background:
+    linear-gradient(120deg, rgba(183, 240, 221, 0.7), rgba(255, 255, 255, 0.2) 36%, rgba(247, 183, 51, 0.18)),
+    var(--bg);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(340px, 0.96fr);
+  gap: clamp(34px, 6vw, 84px);
+  align-items: center;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--teal-dark);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.section-ink .eyebrow {
+  color: var(--mint);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.12;
+}
+
+h1 {
+  max-width: 760px;
+  font-size: clamp(42px, 7vw, 78px);
+  letter-spacing: 0;
+}
+
+h2 {
+  font-size: clamp(30px, 4vw, 48px);
+}
+
+h3 {
+  font-size: 22px;
+}
+
+.hero-lead {
+  max-width: 670px;
+  margin: 22px 0 0;
+  color: #3d4b48;
+  font-size: 19px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 30px 0 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  font-weight: 800;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #fff;
+  background: var(--teal-dark);
+  box-shadow: 0 12px 24px rgba(0, 91, 96, 0.24);
+}
+
+.btn-primary:hover {
+  background: #024a4e;
+}
+
+.btn-secondary {
+  color: var(--teal-dark);
+  background: #ffffff;
+  border-color: var(--line);
+}
+
+.btn-secondary:hover {
+  background: #edf8f4;
+}
+
+.goal-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.goal-strip article {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(220, 231, 226, 0.8);
+  border-radius: var(--radius);
+}
+
+.goal-strip span {
+  display: inline-grid;
+  width: 34px;
+  height: 28px;
+  margin-bottom: 12px;
+  place-items: center;
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 800;
+  background: #d9f5ed;
+  border-radius: 999px;
+}
+
+.goal-strip strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.goal-strip p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.atom-stage {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.36) 46%, transparent 70%),
+    linear-gradient(145deg, rgba(2, 124, 124, 0.16), rgba(247, 183, 51, 0.16));
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+#atomCanvas {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+}
+
+.atom-label {
+  position: absolute;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  color: #fff;
+  font-weight: 800;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.atom-label.proton {
+  top: 22%;
+  right: 18%;
+  background: var(--coral);
+}
+
+.atom-label.neutron {
+  bottom: 28%;
+  left: 16%;
+  background: var(--green);
+}
+
+.atom-label.electron {
+  top: 55%;
+  right: 9%;
+  background: var(--blue);
+}
+
+.hero-stat {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  width: min(240px, calc(100% - 44px));
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(220, 231, 226, 0.9);
+  border-radius: var(--radius);
+}
+
+.hero-stat strong,
+.hero-stat span {
+  display: block;
+}
+
+.hero-stat strong {
+  font-size: 26px;
+}
+
+.hero-stat span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.section-heading {
+  max-width: var(--max);
+  margin: 0 auto 38px;
+}
+
+.section-heading p:last-child {
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.section-ink .section-heading p:last-child {
+  color: rgba(249, 255, 253, 0.76);
+}
+
+.lesson-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 26px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.toc-panel {
+  position: sticky;
+  top: 94px;
+  align-self: start;
+  display: grid;
+  gap: 6px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(20, 44, 42, 0.06);
+}
+
+.toc-panel strong {
+  margin-bottom: 6px;
+}
+
+.toc-panel a {
+  padding: 8px 10px;
+  color: var(--muted);
+  border-radius: 6px;
+}
+
+.toc-panel a:hover {
+  color: var(--teal-dark);
+  background: #edf8f4;
+}
+
+.lesson-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.lesson-card {
+  position: relative;
+  padding: clamp(22px, 4vw, 34px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(20, 44, 42, 0.06);
+}
+
+.card-index {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: var(--teal-dark);
+  font-weight: 800;
+  background: #e8f7f2;
+  border-radius: 50%;
+}
+
+.lesson-card p {
+  max-width: 850px;
+  color: #46534f;
+}
+
+.particle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.particle {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.particle span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 14px;
+  place-items: center;
+  color: #fff;
+  font-weight: 800;
+  border-radius: 50%;
+}
+
+.particle strong {
+  display: block;
+}
+
+.particle p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.electron-chip span {
+  background: var(--blue);
+}
+
+.proton-chip span {
+  background: var(--coral);
+}
+
+.neutron-chip span {
+  background: var(--green);
+}
+
+.formula-block {
+  position: relative;
+  display: inline-grid;
+  width: 116px;
+  height: 116px;
+  margin: 20px 0;
+  place-items: center;
+  color: var(--teal-dark);
+  font-weight: 900;
+  background: #e8f7f2;
+  border: 1px solid #c8ece1;
+  border-radius: var(--radius);
+}
+
+.formula-center {
+  font-size: 56px;
+}
+
+.formula-left,
+.formula-right {
+  position: absolute;
+  left: 16px;
+  font-size: 18px;
+}
+
+.formula-left {
+  top: 16px;
+}
+
+.formula-right {
+  bottom: 16px;
+}
+
+.clean-list {
+  padding-left: 20px;
+}
+
+.clean-list li {
+  margin: 8px 0;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.comparison div {
+  padding: 18px;
+  background: #f8fbfa;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.comparison strong,
+.comparison span {
+  display: block;
+}
+
+.comparison span {
+  margin-top: 6px;
+  color: var(--teal-dark);
+  font-weight: 800;
+}
+
+.feature-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.feature-row span {
+  padding: 10px 12px;
+  color: var(--teal-dark);
+  font-weight: 800;
+  background: #e8f7f2;
+  border-radius: 999px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: var(--max);
+  margin: 0 auto 22px;
+}
+
+.tab-button {
+  min-height: 42px;
+  padding: 0 16px;
+  color: rgba(249, 255, 253, 0.76);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.tab-button.active {
+  color: #14201f;
+  background: var(--amber);
+  border-color: var(--amber);
+}
+
+.tab-panels {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.phenomena-grid,
+.formula-gallery,
+.application-grid,
+.safety-grid,
+.media-grid,
+.reference-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.phenomena-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.phenomena-card,
+.half-life-tool,
+.law-panel,
+.formula-gallery section {
+  padding: 22px;
+  color: #f9fffd;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+}
+
+.phenomena-card code,
+.formula-gallery code {
+  display: block;
+  margin-top: 18px;
+  padding: 12px;
+  white-space: normal;
+  color: #14201f;
+  background: #fff8df;
+  border-radius: 6px;
+}
+
+.alpha {
+  border-top: 4px solid var(--coral);
+}
+
+.beta {
+  border-top: 4px solid var(--gold);
+}
+
+.gamma {
+  border-top: 4px solid var(--violet);
+}
+
+.half-life-tool {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, minmax(120px, 1fr)) 160px;
+  gap: 14px;
+  align-items: end;
+  margin-top: 16px;
+}
+
+.formula-line {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 12px;
+  color: #14201f;
+  font-weight: 800;
+  background: var(--amber);
+  border-radius: 6px;
+}
+
+.half-life-tool label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.half-life-tool input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 10px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+}
+
+#halfLifeResult {
+  min-height: 42px;
+  padding: 10px 12px;
+  color: #14201f;
+  font-weight: 900;
+  background: var(--mint);
+  border-radius: 6px;
+}
+
+.split-content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.split-content section {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+}
+
+.reaction-visual {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.reaction-visual span {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  color: #14201f;
+  font-weight: 900;
+  background: var(--amber);
+  border-radius: 50%;
+}
+
+.reaction-visual.fusion span {
+  background: var(--mint);
+}
+
+.law-panel {
+  margin-top: 16px;
+}
+
+.law-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.law-grid div {
+  padding: 14px;
+  text-align: center;
+  color: #14201f;
+  font-weight: 800;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.formula-gallery {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.application-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.application-card,
+.safety-card,
+.media-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(20, 44, 42, 0.06);
+}
+
+.application-card {
+  padding: 22px;
+}
+
+.application-card ul {
+  padding-left: 20px;
+  color: #46534f;
+}
+
+.app-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 18px;
+  place-items: center;
+  color: #fff;
+  font-weight: 900;
+  border-radius: 50%;
+}
+
+.power .app-icon {
+  background: var(--gold);
+  color: #1a1a1a;
+}
+
+.medicine .app-icon {
+  background: var(--rose);
+}
+
+.industry .app-icon {
+  background: var(--blue);
+}
+
+.agriculture .app-icon {
+  background: var(--green);
+}
+
+.safety-section {
+  background:
+    linear-gradient(90deg, rgba(2, 124, 124, 0.1), rgba(247, 183, 51, 0.1)),
+    #ffffff;
+}
+
+.safety-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.safety-card {
+  padding: 24px;
+}
+
+.safety-card.benefit {
+  border-top: 5px solid var(--green);
+}
+
+.safety-card.risk {
+  border-top: 5px solid var(--coral);
+}
+
+.safety-card.shield {
+  border-top: 5px solid var(--teal);
+}
+
+.safety-meter {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: var(--max);
+  margin: 22px auto 0;
+}
+
+.safety-meter div {
+  padding: 18px;
+  background: #14201f;
+  border-radius: var(--radius);
+}
+
+.safety-meter span,
+.safety-meter strong {
+  display: block;
+}
+
+.safety-meter span {
+  color: var(--mint);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.safety-meter strong {
+  color: #fff;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: var(--max);
+  margin: 0 auto 20px;
+}
+
+.filter {
+  min-height: 40px;
+  padding: 0 14px;
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.filter.active {
+  color: #fff;
+  background: var(--teal-dark);
+  border-color: var(--teal-dark);
+}
+
+.media-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.media-card {
+  overflow: hidden;
+}
+
+.media-card h3,
+.media-card p {
+  padding: 0 18px;
+}
+
+.media-card h3 {
+  margin-top: 18px;
+}
+
+.media-card p {
+  margin-bottom: 20px;
+  color: var(--muted);
+}
+
+.media-art {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: #e8f7f2;
+}
+
+.media-art::before,
+.media-art::after {
+  content: "";
+  position: absolute;
+}
+
+.atom-art {
+  background: radial-gradient(circle, #fff 0 8%, #f4d35e 9% 13%, transparent 14%), #e8f7f2;
+}
+
+.atom-art::before {
+  inset: 42px 22px;
+  border: 3px solid var(--teal);
+  border-radius: 50%;
+  transform: rotate(-24deg);
+}
+
+.atom-art::after {
+  inset: 42px 22px;
+  border: 3px solid var(--coral);
+  border-radius: 50%;
+  transform: rotate(30deg);
+}
+
+.rays-art {
+  background: linear-gradient(90deg, #fff 0 30%, #f9e6a2 30% 55%, #e9d8ff 55% 100%);
+}
+
+.rays-art::before {
+  top: 42px;
+  left: 22px;
+  width: 150px;
+  height: 96px;
+  background: repeating-linear-gradient(12deg, var(--coral) 0 8px, transparent 8px 20px);
+}
+
+.rays-art::after {
+  right: 20px;
+  bottom: 26px;
+  width: 72px;
+  height: 72px;
+  border: 8px solid var(--violet);
+  border-radius: 50%;
+}
+
+.plant-art {
+  background: linear-gradient(#c8ece1 0 58%, #6b7a78 58% 100%);
+}
+
+.plant-art::before {
+  left: 42px;
+  bottom: 38px;
+  width: 82px;
+  height: 90px;
+  background: #fff;
+  border-radius: 42px 42px 8px 8px;
+  box-shadow: 104px 0 0 #fff;
+}
+
+.plant-art::after {
+  right: 38px;
+  bottom: 34px;
+  width: 88px;
+  height: 52px;
+  background: var(--teal-dark);
+  border-radius: 8px 8px 0 0;
+}
+
+.accelerator-art {
+  background: radial-gradient(circle, transparent 0 32%, var(--blue) 33% 38%, transparent 39%), #eaf0ff;
+}
+
+.accelerator-art::before {
+  inset: 28px;
+  border: 14px solid var(--violet);
+  border-radius: 50%;
+}
+
+.accelerator-art::after {
+  top: 84px;
+  left: 50%;
+  width: 46%;
+  height: 8px;
+  background: var(--gold);
+}
+
+.fission-art,
+.fusion-art,
+.pet-art {
+  display: grid;
+  place-items: center;
+}
+
+.fission-art {
+  background: radial-gradient(circle at 50% 50%, var(--gold), #fff6cf 24%, #e8f7f2 25%);
+}
+
+.fusion-art {
+  background: radial-gradient(circle at 42% 50%, var(--coral), transparent 18%), radial-gradient(circle at 58% 50%, var(--blue), transparent 18%), #eef6ff;
+}
+
+.pet-art {
+  background: linear-gradient(135deg, #fff, #d9f5ed 40%, #ffe8e2);
+}
+
+.play-button {
+  min-width: 72px;
+  min-height: 42px;
+  color: #fff;
+  font-weight: 900;
+  background: rgba(20, 32, 31, 0.82);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.quiz-section {
+  background:
+    linear-gradient(135deg, rgba(247, 183, 51, 0.18), rgba(2, 124, 124, 0.12)),
+    #fff;
+}
+
+.quiz-form {
+  display: grid;
+  gap: 14px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.quiz-card {
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teal);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(20, 44, 42, 0.06);
+}
+
+.quiz-card.correct {
+  border-left-color: var(--green);
+  background: #f1fbf6;
+}
+
+.quiz-card.incorrect {
+  border-left-color: var(--coral);
+  background: #fff5f3;
+}
+
+.quiz-level {
+  margin: 0 0 8px;
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.quiz-card label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+  background: #f8fbfa;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quiz-card input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--teal-dark);
+}
+
+.explanation {
+  display: none;
+  margin: 14px 0 0;
+  padding: 12px;
+  color: #33413e;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.quiz-card.revealed .explanation {
+  display: block;
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+#quizResult {
+  min-height: 46px;
+  padding: 11px 14px;
+  color: var(--teal-dark);
+  font-weight: 900;
+  background: #e8f7f2;
+  border-radius: var(--radius);
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.timeline article {
+  position: relative;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.timeline time {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  color: #fff;
+  font-weight: 800;
+  background: var(--teal-dark);
+  border-radius: 999px;
+}
+
+.timeline p {
+  color: var(--muted);
+}
+
+.references {
+  background: #14201f;
+  color: #fff;
+}
+
+.references .eyebrow {
+  color: var(--mint);
+}
+
+.reference-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.reference-grid a {
+  padding: 18px;
+  color: #14201f;
+  font-weight: 800;
+  background: #fff;
+  border-radius: var(--radius);
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px clamp(18px, 4vw, 56px);
+  color: #fff;
+  background: #0d1514;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer a {
+  color: var(--mint);
+  font-weight: 800;
+}
+
+@media (max-width: 1060px) {
+  .main-nav {
+    position: fixed;
+    inset: 74px 16px auto 16px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  body.nav-open .main-nav {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .hero-grid,
+  .lesson-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .toc-panel {
+    position: static;
+  }
+
+  .goal-strip,
+  .phenomena-grid,
+  .application-grid,
+  .safety-grid,
+  .media-grid,
+  .timeline,
+  .reference-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .half-life-tool {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .half-life-tool > div {
+    grid-column: 1 / -1;
+  }
+
+  .formula-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 42px;
+  }
+
+  .section-band,
+  .section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .goal-strip,
+  .particle-grid,
+  .comparison,
+  .phenomena-grid,
+  .split-content,
+  .application-grid,
+  .safety-grid,
+  .safety-meter,
+  .media-grid,
+  .timeline,
+  .reference-grid,
+  .law-grid,
+  .half-life-tool {
+    grid-template-columns: 1fr;
+  }
+
+  .atom-stage {
+    min-height: 420px;
+  }
+
+  #atomCanvas {
+    min-height: 420px;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Cosmic theme overrides */
+body {
+  color: #edf7ff;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(109, 93, 252, 0.32), transparent 28%),
+    radial-gradient(circle at 82% 10%, rgba(247, 183, 51, 0.22), transparent 24%),
+    radial-gradient(circle at 72% 74%, rgba(2, 124, 124, 0.28), transparent 32%),
+    linear-gradient(135deg, #050713 0%, #10113a 42%, #062b33 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  z-index: 0;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.95) 0 1px, transparent 1.7px) 0 0 / 82px 82px,
+    radial-gradient(circle, rgba(183,240,221,0.86) 0 1px, transparent 1.8px) 34px 28px / 118px 118px,
+    radial-gradient(circle, rgba(247,183,51,0.75) 0 1.3px, transparent 2px) 68px 46px / 156px 156px;
+  opacity: 0.92;
+}
+
+body::after {
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 28% 22%, rgba(109, 93, 252, 0.34), transparent 34%),
+    radial-gradient(ellipse at 76% 62%, rgba(2, 124, 124, 0.32), transparent 36%),
+    linear-gradient(180deg, rgba(5, 7, 19, 0.12), rgba(5, 7, 19, 0.74));
+}
+
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.site-header {
+  color: #edf7ff;
+  background: rgba(5, 8, 24, 0.78);
+  border-bottom-color: rgba(183, 240, 221, 0.18);
+}
+
+.brand small,
+.main-nav a,
+.hero-lead,
+.goal-strip p,
+.section-heading p:last-child,
+.lesson-card p,
+.particle p,
+.comparison p,
+.application-card ul,
+.media-card p,
+.timeline p,
+.quiz-card label,
+.hero-stat span {
+  color: rgba(237, 247, 255, 0.74);
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: #061115;
+  background: var(--mint);
+}
+
+.nav-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(183, 240, 221, 0.24);
+}
+
+.nav-toggle span {
+  background: #edf7ff;
+}
+
+.section-light,
+.hero,
+.safety-section,
+.quiz-section {
+  background: transparent;
+}
+
+.section-ink {
+  background:
+    radial-gradient(circle at 20% 12%, rgba(247, 183, 51, 0.2), transparent 26%),
+    radial-gradient(circle at 80% 82%, rgba(109, 93, 252, 0.24), transparent 32%),
+    rgba(5, 8, 24, 0.44);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 52% 44%, rgba(183, 240, 221, 0.18), transparent 26%),
+    radial-gradient(circle at 12% 78%, rgba(239, 99, 81, 0.16), transparent 24%),
+    linear-gradient(90deg, rgba(5, 7, 19, 0.28), rgba(16, 17, 58, 0.14));
+}
+
+.atom-stage {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.16), rgba(119, 212, 255, 0.08) 34%, transparent 68%),
+    radial-gradient(circle at 20% 24%, rgba(247, 183, 51, 0.18), transparent 26%),
+    linear-gradient(145deg, rgba(8, 13, 38, 0.9), rgba(19, 31, 72, 0.76));
+  border-color: rgba(183, 240, 221, 0.2);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34), inset 0 0 80px rgba(119, 212, 255, 0.12);
+}
+
+.goal-strip article,
+.toc-panel,
+.lesson-card,
+.particle,
+.comparison div,
+.application-card,
+.safety-card,
+.media-card,
+.timeline article,
+.quiz-card,
+.hero-stat,
+.reference-grid a,
+.glossary-content {
+  color: #edf7ff;
+  background: rgba(9, 15, 39, 0.72);
+  border-color: rgba(183, 240, 221, 0.18);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+}
+
+.toc-panel a,
+.comparison span,
+.quiz-level,
+.eyebrow,
+.card-index,
+.feature-row span,
+.glossary-content p {
+  color: var(--mint);
+}
+
+.toc-panel a:hover,
+.quiz-card label,
+.explanation,
+.filter,
+.law-grid div {
+  color: #edf7ff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(183, 240, 221, 0.18);
+}
+
+.formula-block,
+.feature-row span,
+.formula-line,
+#quizResult {
+  color: #061115;
+  background: var(--mint);
+}
+
+.btn-secondary {
+  color: #edf7ff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(183, 240, 221, 0.24);
+}
+
+.btn-secondary:hover {
+  background: rgba(183, 240, 221, 0.16);
+}
+
+.media-art {
+  background-color: rgba(8, 13, 38, 0.72);
+}
+
+.references {
+  background: rgba(5, 8, 24, 0.84);
+}
+
+.site-footer {
+  background: rgba(5, 8, 24, 0.94);
+  border-top: 1px solid rgba(183, 240, 221, 0.18);
+}
+
+@media (max-width: 1060px) {
+  .main-nav {
+    background: rgba(5, 8, 24, 0.94);
+    border-color: rgba(183, 240, 221, 0.18);
+  }
+}
+
+</style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="#home" aria-label="Trang chủ Vật lí hạt nhân">
+      <span class="brand-mark">N</span>
+      <span>
+        <strong>Vật Lí Hạt Nhân</strong>
+        <small>Các hiện tượng và ứng dụng</small>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-label="Mở menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <a href="#basic">Kiến thức</a>
+      <a href="#phenomena">Hiện tượng</a>
+      <a href="#applications">Ứng dụng</a>
+      <a href="#safety">An toàn</a>
+      <a href="#media">Thư viện</a>
+      <a href="#quiz">Trắc nghiệm</a>
+      <a href="#discover">Khám phá</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section-band" id="home">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Website học tập Vật lí 12</p>
+          <h1>Khám Phá Thế Giới Vật Lí Hạt Nhân</h1>
+          <p class="hero-lead">
+            Vật lí hạt nhân nghiên cứu cấu trúc hạt nhân nguyên tử, các tương tác bên trong hạt nhân,
+            quá trình phóng xạ, phản ứng hạt nhân và năng lượng sinh ra từ những biến đổi ở cấp độ rất nhỏ.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#basic">Tìm hiểu ngay</a>
+            <a class="btn btn-secondary" href="#quiz">Làm trắc nghiệm</a>
+          </div>
+          <div class="goal-strip" aria-label="Mục tiêu website">
+            <article>
+              <span>01</span>
+              <strong>Cung cấp kiến thức cơ bản</strong>
+              <p>Nắm được nguyên tử, hạt nhân, đồng vị và lực hạt nhân.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <strong>Giới thiệu hiện tượng hạt nhân</strong>
+              <p>Hiểu phóng xạ, phân hạch, nhiệt hạch và định luật bảo toàn.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <strong>Tìm hiểu ứng dụng thực tiễn</strong>
+              <p>Liên hệ sản xuất điện, y học, công nghiệp và nông nghiệp.</p>
+            </article>
+          </div>
+        </div>
+        <div class="atom-stage" aria-label="Mô hình nguyên tử 3D">
+          <canvas id="atomCanvas" width="720" height="720"></canvas>
+          <div class="atom-label proton">p+</div>
+          <div class="atom-label neutron">n0</div>
+          <div class="atom-label electron">e-</div>
+          <div class="hero-stat">
+            <strong>10<sup>-15</sup> m</strong>
+            <span>Kích thước xấp xỉ của hạt nhân</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="basic">
+      <div class="section-heading">
+        <p class="eyebrow">II. Kiến thức cơ bản</p>
+        <h2>Nền tảng để đọc các hiện tượng hạt nhân</h2>
+        <p>Từ cấu tạo nguyên tử đến lực hạt nhân, phần này giúp người học có bộ khái niệm chung trước khi đi vào phản ứng và ứng dụng.</p>
+      </div>
+
+      <div class="lesson-layout">
+        <aside class="toc-panel">
+          <strong>Nội dung nhanh</strong>
+          <a href="#atom-structure">Cấu tạo nguyên tử</a>
+          <a href="#nucleus">Hạt nhân nguyên tử</a>
+          <a href="#isotopes">Đồng vị</a>
+          <a href="#nuclear-force">Lực hạt nhân</a>
+        </aside>
+        <div class="lesson-stack">
+          <article class="lesson-card" id="atom-structure">
+            <div class="card-index">1</div>
+            <h3>Cấu tạo nguyên tử</h3>
+            <p>Nguyên tử là hạt vô cùng nhỏ tạo nên các chất. Mỗi nguyên tử gồm hạt nhân ở trung tâm và lớp vỏ electron chuyển động xung quanh.</p>
+            <div class="particle-grid">
+              <div class="particle electron-chip">
+                <span>e-</span>
+                <strong>Electron</strong>
+                <p>Mang điện tích âm, nằm ở lớp vỏ nguyên tử.</p>
+              </div>
+              <div class="particle proton-chip">
+                <span>p+</span>
+                <strong>Proton</strong>
+                <p>Mang điện tích dương, nằm trong hạt nhân.</p>
+              </div>
+              <div class="particle neutron-chip">
+                <span>n0</span>
+                <strong>Nơtron</strong>
+                <p>Không mang điện, góp phần tạo số khối của hạt nhân.</p>
+              </div>
+            </div>
+            <p>Mô hình nguyên tử hiện đại mô tả electron bằng đám mây xác suất, còn mô hình hành tinh thường dùng để trực quan hóa trong học tập.</p>
+          </article>
+
+          <article class="lesson-card" id="nucleus">
+            <div class="card-index">2</div>
+            <h3>Hạt nhân nguyên tử</h3>
+            <p>Hạt nhân là phần trung tâm của nguyên tử, gồm proton và nơtron. Hầu hết khối lượng nguyên tử tập trung tại hạt nhân.</p>
+            <div class="formula-block">
+              <span class="formula-left">A</span>
+              <span class="formula-center">X</span>
+              <span class="formula-right">Z</span>
+            </div>
+            <ul class="clean-list">
+              <li><strong>A</strong> là số khối, bằng tổng số proton và nơtron.</li>
+              <li><strong>Z</strong> là số proton, cũng là số hiệu nguyên tử.</li>
+              <li><strong>N</strong> là số nơtron, được tính bằng công thức <strong>N = A - Z</strong>.</li>
+            </ul>
+          </article>
+
+          <article class="lesson-card" id="isotopes">
+            <div class="card-index">3</div>
+            <h3>Đồng vị</h3>
+            <p>Đồng vị là các nguyên tử có cùng số proton Z nhưng khác số nơtron, vì vậy khác số khối A.</p>
+            <div class="comparison">
+              <div>
+                <strong>Cacbon-12</strong>
+                <span>A = 12, Z = 6, N = 6</span>
+                <p>Bền, phổ biến trong tự nhiên.</p>
+              </div>
+              <div>
+                <strong>Cacbon-14</strong>
+                <span>A = 14, Z = 6, N = 8</span>
+                <p>Phóng xạ, dùng trong xác định niên đại cổ vật.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-card" id="nuclear-force">
+            <div class="card-index">4</div>
+            <h3>Lực hạt nhân</h3>
+            <p>Lực hạt nhân là lực hút rất mạnh giữa các nuclon, giữ proton và nơtron liên kết trong hạt nhân bất chấp lực đẩy điện giữa các proton.</p>
+            <div class="feature-row">
+              <span>Rất mạnh</span>
+              <span>Tầm tác dụng ngắn</span>
+              <span>Không phụ thuộc điện tích</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-ink" id="phenomena">
+      <div class="section-heading">
+        <p class="eyebrow">III. Các hiện tượng vật lí hạt nhân</p>
+        <h2>Phóng xạ, phản ứng và năng lượng hạt nhân</h2>
+        <p>Các hiện tượng này cho thấy hạt nhân có thể tự biến đổi hoặc biến đổi khi tương tác với hạt khác.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Nhóm hiện tượng">
+        <button class="tab-button active" type="button" data-tab="radioactivity">Phóng xạ</button>
+        <button class="tab-button" type="button" data-tab="reaction">Phản ứng hạt nhân</button>
+        <button class="tab-button" type="button" data-tab="energy">Năng lượng hạt nhân</button>
+      </div>
+
+      <div class="tab-panels">
+        <article class="tab-panel active" id="radioactivity" role="tabpanel">
+          <div class="phenomena-grid">
+            <section class="phenomena-card alpha">
+              <h3>Phóng xạ Alpha (alpha)</h3>
+              <p>Bản chất là dòng hạt nhân heli gồm 2 proton và 2 nơtron. Khả năng đâm xuyên yếu, có thể bị chặn bởi giấy hoặc lớp da ngoài.</p>
+              <code>A/Z X -> A-4/Z-2 Y + 4/2 He</code>
+            </section>
+            <section class="phenomena-card beta">
+              <h3>Phóng xạ Beta (beta)</h3>
+              <p>Beta trừ phát ra electron khi nơtron biến thành proton. Beta cộng phát ra positron khi proton biến thành nơtron.</p>
+              <code>n -> p + e- + phản nơtrino</code>
+            </section>
+            <section class="phenomena-card gamma">
+              <h3>Phóng xạ Gamma (gamma)</h3>
+              <p>Là bức xạ điện từ năng lượng cao, không làm thay đổi A và Z nhưng có khả năng đâm xuyên mạnh, cần che chắn tốt.</p>
+              <code>X* -> X + gamma</code>
+            </section>
+          </div>
+          <div class="half-life-tool">
+            <div>
+              <h3>Chu kì bán rã</h3>
+              <p>Chu kì bán rã là thời gian để số hạt nhân phóng xạ còn lại giảm đi một nửa.</p>
+              <div class="formula-line">N = N0 (1/2)<sup>t/T</sup></div>
+            </div>
+            <label>
+              Số hạt ban đầu N0
+              <input id="initialN" type="number" min="1" value="1000">
+            </label>
+            <label>
+              Thời gian t
+              <input id="timeT" type="number" min="0" value="6">
+            </label>
+            <label>
+              Chu kì bán rã T
+              <input id="periodT" type="number" min="0.1" step="0.1" value="2">
+            </label>
+            <output id="halfLifeResult">N = 125 hạt</output>
+          </div>
+        </article>
+
+        <article class="tab-panel" id="reaction" role="tabpanel">
+          <div class="split-content">
+            <section>
+              <h3>Phản ứng phân hạch</h3>
+              <p>Phân hạch là quá trình hạt nhân nặng như Uranium-235 hấp thụ nơtron rồi vỡ thành hai hạt nhân nhẹ hơn, giải phóng năng lượng và nơtron mới.</p>
+              <div class="reaction-visual">
+                <span>n</span>
+                <span>U-235</span>
+                <span>Ba</span>
+                <span>Kr</span>
+                <span>3n</span>
+              </div>
+            </section>
+            <section>
+              <h3>Phản ứng nhiệt hạch</h3>
+              <p>Nhiệt hạch là quá trình các hạt nhân nhẹ tổng hợp thành hạt nhân nặng hơn. Đây là nguồn năng lượng chủ yếu của Mặt Trời và các sao.</p>
+              <div class="reaction-visual fusion">
+                <span>D</span>
+                <span>T</span>
+                <span>He</span>
+                <span>n</span>
+                <span>E</span>
+              </div>
+            </section>
+          </div>
+          <div class="law-panel">
+            <h3>Định luật bảo toàn</h3>
+            <p>Trong phản ứng hạt nhân, cần xét bảo toàn điện tích, bảo toàn số nuclon và bảo toàn năng lượng.</p>
+            <div class="law-grid">
+              <div>Bảo toàn điện tích</div>
+              <div>Bảo toàn số nuclon</div>
+              <div>Bảo toàn năng lượng</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tab-panel" id="energy" role="tabpanel">
+          <div class="formula-gallery">
+            <section>
+              <h3>Độ hụt khối</h3>
+              <p>Khối lượng hạt nhân nhỏ hơn tổng khối lượng các nuclon riêng rẽ.</p>
+              <code>delta m = Zmp + Nmn - mhn</code>
+            </section>
+            <section>
+              <h3>Năng lượng liên kết</h3>
+              <p>Năng lượng cần cung cấp để tách hạt nhân thành các nuclon riêng rẽ.</p>
+              <code>Wlk = delta m c2</code>
+            </section>
+            <section>
+              <h3>Công thức Einstein</h3>
+              <p>Khối lượng và năng lượng có thể chuyển hóa qua hệ thức nổi tiếng.</p>
+              <code>E = mc2</code>
+            </section>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-light" id="applications">
+      <div class="section-heading">
+        <p class="eyebrow">IV. Ứng dụng</p>
+        <h2>Vật lí hạt nhân trong đời sống</h2>
+        <p>Từ nhà máy điện đến y học hạt nhân, các ứng dụng đều cần hiểu đúng lợi ích và giới hạn an toàn.</p>
+      </div>
+      <div class="application-grid">
+        <article class="application-card power">
+          <div class="app-icon">E</div>
+          <h3>Trong sản xuất điện</h3>
+          <p>Nhà máy điện hạt nhân dùng nhiệt sinh ra từ phản ứng phân hạch để tạo hơi nước, quay tua-bin và phát điện.</p>
+          <ul>
+            <li>Ưu điểm: công suất lớn, phát thải CO2 thấp khi vận hành.</li>
+            <li>Nhược điểm: yêu cầu an toàn cao, xử lí chất thải phóng xạ phức tạp.</li>
+          </ul>
+        </article>
+        <article class="application-card medicine">
+          <div class="app-icon">M</div>
+          <h3>Trong y học</h3>
+          <p>PET/CT dùng đồng vị phóng xạ để ghi hình chức năng cơ thể. Xạ trị dùng bức xạ ion hóa để tiêu diệt tế bào ung thư.</p>
+          <ul>
+            <li>Chẩn đoán hình ảnh bằng chất đánh dấu phóng xạ.</li>
+            <li>Điều trị khối u bằng chùm tia có kiểm soát.</li>
+          </ul>
+        </article>
+        <article class="application-card industry">
+          <div class="app-icon">I</div>
+          <h3>Trong công nghiệp</h3>
+          <p>Bức xạ giúp kiểm tra mối hàn, phát hiện khuyết tật bên trong vật liệu và đo độ dày mà không phá hủy mẫu.</p>
+          <ul>
+            <li>Chụp ảnh phóng xạ công nghiệp.</li>
+            <li>Đo độ dày giấy, kim loại, nhựa.</li>
+          </ul>
+        </article>
+        <article class="application-card agriculture">
+          <div class="app-icon">A</div>
+          <h3>Trong nông nghiệp</h3>
+          <p>Tia phóng xạ được dùng để tạo giống đột biến, diệt vi sinh vật và kéo dài thời gian bảo quản thực phẩm.</p>
+          <ul>
+            <li>Tạo giống cây trồng có đặc tính mới.</li>
+            <li>Chiếu xạ bảo quản thực phẩm đúng tiêu chuẩn.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section safety-section" id="safety">
+      <div class="section-heading">
+        <p class="eyebrow">V. Tác động và an toàn bức xạ</p>
+        <h2>Hiểu lợi ích, nhận diện nguy cơ, thực hiện bảo vệ</h2>
+      </div>
+      <div class="safety-grid">
+        <article class="safety-card benefit">
+          <h3>Lợi ích</h3>
+          <p>Nguồn năng lượng lớn, hỗ trợ y học, thúc đẩy nghiên cứu khoa học và giúp kiểm tra vật liệu hiện đại.</p>
+        </article>
+        <article class="safety-card risk">
+          <h3>Tác hại</h3>
+          <p>Bức xạ ion hóa liều cao có thể ảnh hưởng sức khỏe, gây đột biến gen và làm ô nhiễm môi trường nếu quản lí kém.</p>
+        </article>
+        <article class="safety-card shield">
+          <h3>Biện pháp an toàn</h3>
+          <p>Che chắn bằng chì hoặc bê tông, giảm thời gian tiếp xúc và tăng khoảng cách với nguồn phóng xạ.</p>
+        </article>
+      </div>
+      <div class="safety-meter" aria-label="Nguyên tắc an toàn bức xạ">
+        <div>
+          <span>Thời gian</span>
+          <strong>Giảm tiếp xúc</strong>
+        </div>
+        <div>
+          <span>Khoảng cách</span>
+          <strong>Đứng xa nguồn</strong>
+        </div>
+        <div>
+          <span>Che chắn</span>
+          <strong>Dùng vật liệu phù hợp</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" id="media">
+      <div class="section-heading">
+        <p class="eyebrow">VI. Thư viện hình ảnh và video</p>
+        <h2>Tư liệu trực quan</h2>
+        <p>Các thẻ bên dưới mô phỏng dạng tư liệu học tập cho cấu tạo nguyên tử, phóng xạ, nhà máy điện hạt nhân và máy gia tốc hạt.</p>
+      </div>
+      <div class="filter-bar" aria-label="Bộ lọc thư viện">
+        <button class="filter active" type="button" data-filter="all">Tất cả</button>
+        <button class="filter" type="button" data-filter="image">Hình ảnh</button>
+        <button class="filter" type="button" data-filter="video">Video</button>
+      </div>
+      <div class="media-grid">
+        <article class="media-card image-card" data-kind="image">
+          <div class="media-art atom-art"></div>
+          <h3>Cấu tạo nguyên tử</h3>
+          <p>Minh họa hạt nhân và các lớp electron.</p>
+        </article>
+        <article class="media-card image-card" data-kind="image">
+          <div class="media-art rays-art"></div>
+          <h3>Phóng xạ alpha, beta, gamma</h3>
+          <p>So sánh khả năng đâm xuyên của các loại bức xạ.</p>
+        </article>
+        <article class="media-card image-card" data-kind="image">
+          <div class="media-art plant-art"></div>
+          <h3>Nhà máy điện hạt nhân</h3>
+          <p>Hệ thống lò phản ứng, tua-bin và tháp làm mát.</p>
+        </article>
+        <article class="media-card image-card" data-kind="image">
+          <div class="media-art accelerator-art"></div>
+          <h3>Máy gia tốc hạt</h3>
+          <p>Thiết bị tạo chùm hạt năng lượng cao phục vụ nghiên cứu.</p>
+        </article>
+        <article class="media-card video-card" data-kind="video">
+          <div class="media-art fission-art"><button class="play-button" type="button">Play</button></div>
+          <h3>Mô phỏng phân hạch</h3>
+          <p>Chuỗi phân hạch và sự nhân lên của nơtron.</p>
+        </article>
+        <article class="media-card video-card" data-kind="video">
+          <div class="media-art fusion-art"><button class="play-button" type="button">Play</button></div>
+          <h3>Mô phỏng nhiệt hạch</h3>
+          <p>Các hạt nhân nhẹ tổng hợp ở nhiệt độ rất cao.</p>
+        </article>
+        <article class="media-card video-card" data-kind="video">
+          <div class="media-art pet-art"><button class="play-button" type="button">Play</button></div>
+          <h3>Ứng dụng trong y học</h3>
+          <p>Chẩn đoán PET/CT và xạ trị ung thư.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section quiz-section" id="quiz">
+      <div class="section-heading">
+        <p class="eyebrow">VII. Câu hỏi trắc nghiệm</p>
+        <h2>Luyện tập và chấm điểm tự động</h2>
+        <p>Chọn đáp án, bấm chấm điểm để xem kết quả và giải thích chi tiết.</p>
+      </div>
+      <form class="quiz-form" id="quizForm">
+        <div class="quiz-card" data-answer="b">
+          <p class="quiz-level">Cơ bản</p>
+          <h3>1. Hạt nào không mang điện?</h3>
+          <label><input type="radio" name="q1" value="a"> Electron</label>
+          <label><input type="radio" name="q1" value="b"> Nơtron</label>
+          <label><input type="radio" name="q1" value="c"> Proton</label>
+          <p class="explanation">Nơtron có điện tích bằng 0 nên không mang điện.</p>
+        </div>
+        <div class="quiz-card" data-answer="c">
+          <p class="quiz-level">Cơ bản</p>
+          <h3>2. Đồng vị là gì?</h3>
+          <label><input type="radio" name="q2" value="a"> Các nguyên tử có cùng số nơtron</label>
+          <label><input type="radio" name="q2" value="b"> Các nguyên tử có cùng số khối</label>
+          <label><input type="radio" name="q2" value="c"> Các nguyên tử có cùng Z nhưng khác A</label>
+          <p class="explanation">Đồng vị có cùng số proton Z nhưng khác số nơtron, nên khác số khối A.</p>
+        </div>
+        <div class="quiz-card" data-answer="a">
+          <p class="quiz-level">Cơ bản</p>
+          <h3>3. Phóng xạ gamma có đặc điểm nào?</h3>
+          <label><input type="radio" name="q3" value="a"> Là bức xạ điện từ năng lượng cao</label>
+          <label><input type="radio" name="q3" value="b"> Là dòng hạt nhân heli</label>
+          <label><input type="radio" name="q3" value="c"> Luôn làm Z tăng thêm 1</label>
+          <p class="explanation">Gamma là bức xạ điện từ, có khả năng đâm xuyên mạnh.</p>
+        </div>
+        <div class="quiz-card" data-answer="b">
+          <p class="quiz-level">Nâng cao</p>
+          <h3>4. Nếu N0 = 800, sau 3 chu kì bán rã còn lại bao nhiêu hạt?</h3>
+          <label><input type="radio" name="q4" value="a"> 400</label>
+          <label><input type="radio" name="q4" value="b"> 100</label>
+          <label><input type="radio" name="q4" value="c"> 200</label>
+          <p class="explanation">Sau 3 chu kì, N = 800 x (1/2)^3 = 100.</p>
+        </div>
+        <div class="quiz-card" data-answer="c">
+          <p class="quiz-level">Nâng cao</p>
+          <h3>5. Công thức năng lượng liên kết là gì?</h3>
+          <label><input type="radio" name="q5" value="a"> N = A - Z</label>
+          <label><input type="radio" name="q5" value="b"> F = ma</label>
+          <label><input type="radio" name="q5" value="c"> Wlk = delta m c2</label>
+          <p class="explanation">Năng lượng liên kết được tính từ độ hụt khối theo Wlk = delta m c2.</p>
+        </div>
+        <div class="quiz-actions">
+          <button class="btn btn-primary" type="submit">Chấm điểm</button>
+          <button class="btn btn-secondary" type="reset">Làm lại</button>
+          <output id="quizResult">Chưa chấm điểm</output>
+        </div>
+      </form>
+    </section>
+
+    <section class="section section-light" id="discover">
+      <div class="section-heading">
+        <p class="eyebrow">VIII. Góc khám phá khoa học</p>
+        <h2>Nhân vật và sự kiện nổi bật</h2>
+      </div>
+      <div class="timeline">
+        <article>
+          <time>1896</time>
+          <h3>Khám phá phóng xạ</h3>
+          <p>Hiện tượng phóng xạ mở đường cho việc nghiên cứu hạt nhân nguyên tử và các biến đổi tự phát.</p>
+        </article>
+        <article>
+          <time>Rutherford</time>
+          <h3>Ernest Rutherford</h3>
+          <p>Đề xuất mô hình hạt nhân nguyên tử sau thí nghiệm tán xạ hạt alpha qua lá vàng.</p>
+        </article>
+        <article>
+          <time>Curie</time>
+          <h3>Marie Curie</h3>
+          <p>Nghiên cứu phóng xạ, phát hiện polonium và radium, đặt nền móng cho hóa học phóng xạ.</p>
+        </article>
+        <article>
+          <time>Einstein</time>
+          <h3>Albert Einstein</h3>
+          <p>Công thức E = mc2 giúp giải thích nguồn năng lượng rất lớn trong các phản ứng hạt nhân.</p>
+        </article>
+        <article>
+          <time>1942-1945</time>
+          <h3>Dự án Manhattan</h3>
+          <p>Một sự kiện lịch sử lớn cho thấy sức mạnh và trách nhiệm đạo đức khi ứng dụng năng lượng hạt nhân.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section references" id="references">
+      <div class="section-heading">
+        <p class="eyebrow">IX. Tài liệu tham khảo</p>
+        <h2>Nguồn học tập gợi ý</h2>
+      </div>
+      <div class="reference-grid">
+        <a href="#references">Sách giáo khoa Vật lí 12</a>
+        <a href="#references">Sách chuyên đề Vật lí hạt nhân</a>
+        <a href="#references">Bài giảng trực tuyến</a>
+        <a href="#references">Tài liệu nghiên cứu khoa học</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Website: Vật Lí Hạt Nhân Và Các Hiện Tượng</p>
+    <a href="#top">Lên đầu trang</a>
+  </footer>
+
+  <script>
+const navToggle = document.querySelector(".nav-toggle");
+const body = document.body;
+const navLinks = document.querySelectorAll(".main-nav a");
+
+function closeNavigation() {
+  body.classList.remove("nav-open");
+  if (navToggle) {
+    navToggle.setAttribute("aria-expanded", "false");
+  }
+}
+
+if (navToggle) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = body.classList.toggle("nav-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+}
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", closeNavigation);
+});
+
+const sections = Array.from(document.querySelectorAll("main section[id]"));
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;
+      }
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute("href") === `#${entry.target.id}`;
+        link.classList.toggle("active", isActive);
+      });
+    });
+  },
+  {
+    rootMargin: "-45% 0px -50% 0px",
+    threshold: 0.01,
+  }
+);
+
+sections.forEach((section) => observer.observe(section));
+
+const canvas = document.getElementById("atomCanvas");
+const ctx = canvas ? canvas.getContext("2d") : null;
+let atomFrame = 0;
+let atomPointer = { x: 0, y: 0 };
+
+function resizeCanvas() {
+  if (!canvas || !ctx) {
+    return;
+  }
+  const rect = canvas.getBoundingClientRect();
+  const ratio = window.devicePixelRatio || 1;
+  canvas.width = Math.max(360, Math.floor(rect.width * ratio));
+  canvas.height = Math.max(360, Math.floor(rect.height * ratio));
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+}
+
+function drawOrbit(cx, cy, rx, ry, tilt, color) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(tilt);
+  ctx.beginPath();
+  ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawSphere(x, y, radius, color, glow) {
+  const gradient = ctx.createRadialGradient(x - radius * 0.35, y - radius * 0.35, radius * 0.2, x, y, radius);
+  gradient.addColorStop(0, "#ffffff");
+  gradient.addColorStop(0.35, color);
+  gradient.addColorStop(1, glow);
+  ctx.save();
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = glow;
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function orbitPoint(cx, cy, rx, ry, angle, tilt) {
+  const x = Math.cos(angle) * rx;
+  const y = Math.sin(angle) * ry;
+  const cos = Math.cos(tilt);
+  const sin = Math.sin(tilt);
+  return {
+    x: cx + x * cos - y * sin,
+    y: cy + x * sin + y * cos,
+  };
+}
+
+function drawAtom() {
+  if (!canvas || !ctx) {
+    return;
+  }
+  const rect = canvas.getBoundingClientRect();
+  const width = rect.width;
+  const height = rect.height;
+  const cx = width / 2 + atomPointer.x * 12;
+  const cy = height / 2 + atomPointer.y * 12;
+  const min = Math.min(width, height);
+  const orbitX = min * 0.34;
+  const orbitY = min * 0.14;
+  const t = atomFrame * 0.012;
+
+  ctx.clearRect(0, 0, width, height);
+
+  const bg = ctx.createRadialGradient(cx, cy, 10, cx, cy, min * 0.6);
+  bg.addColorStop(0, "rgba(255,255,255,0.72)");
+  bg.addColorStop(0.24, "rgba(119,212,255,0.28)");
+  bg.addColorStop(0.58, "rgba(109,93,252,0.2)");
+  bg.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, width, height);
+
+  drawOrbit(cx, cy, orbitX, orbitY, -0.52, "rgba(2,124,124,0.58)");
+  drawOrbit(cx, cy, orbitX, orbitY, 0.72, "rgba(239,99,81,0.48)");
+  drawOrbit(cx, cy, orbitX * 0.92, orbitY * 1.08, 1.58, "rgba(40,104,199,0.42)");
+
+  const nucleus = [
+    { x: -16, y: -10, r: 22, color: "#ef6351", glow: "rgba(239,99,81,0.5)" },
+    { x: 14, y: -12, r: 21, color: "#2d9d78", glow: "rgba(45,157,120,0.5)" },
+    { x: 4, y: 16, r: 23, color: "#f7b733", glow: "rgba(247,183,51,0.5)" },
+    { x: -22, y: 18, r: 18, color: "#6d5dfc", glow: "rgba(109,93,252,0.45)" },
+    { x: 24, y: 18, r: 18, color: "#027c7c", glow: "rgba(2,124,124,0.45)" },
+  ];
+
+  nucleus.forEach((particle, index) => {
+    const pulse = Math.sin(t * 3 + index) * 2;
+    drawSphere(cx + particle.x, cy + particle.y, particle.r + pulse, particle.color, particle.glow);
+  });
+
+  const electrons = [
+    { rx: orbitX, ry: orbitY, tilt: -0.52, speed: 2.1, offset: 0, color: "#2868c7" },
+    { rx: orbitX, ry: orbitY, tilt: 0.72, speed: 1.7, offset: 2.1, color: "#027c7c" },
+    { rx: orbitX * 0.92, ry: orbitY * 1.08, tilt: 1.58, speed: 1.9, offset: 4.2, color: "#ef6351" },
+  ];
+
+  electrons.forEach((electron) => {
+    const point = orbitPoint(cx, cy, electron.rx, electron.ry, t * electron.speed + electron.offset, electron.tilt);
+    drawSphere(point.x, point.y, 9, electron.color, "rgba(40,104,199,0.55)");
+  });
+
+  atomFrame += 1;
+  requestAnimationFrame(drawAtom);
+}
+
+if (canvas && ctx) {
+  resizeCanvas();
+  drawAtom();
+  window.addEventListener("resize", resizeCanvas);
+  canvas.addEventListener("pointermove", (event) => {
+    const rect = canvas.getBoundingClientRect();
+    atomPointer = {
+      x: (event.clientX - rect.left) / rect.width - 0.5,
+      y: (event.clientY - rect.top) / rect.height - 0.5,
+    };
+  });
+  canvas.addEventListener("pointerleave", () => {
+    atomPointer = { x: 0, y: 0 };
+  });
+}
+
+const tabButtons = document.querySelectorAll(".tab-button");
+const tabPanels = document.querySelectorAll(".tab-panel");
+
+tabButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const id = button.dataset.tab;
+    tabButtons.forEach((item) => item.classList.toggle("active", item === button));
+    tabPanels.forEach((panel) => panel.classList.toggle("active", panel.id === id));
+  });
+});
+
+const initialN = document.getElementById("initialN");
+const timeT = document.getElementById("timeT");
+const periodT = document.getElementById("periodT");
+const halfLifeResult = document.getElementById("halfLifeResult");
+
+function formatNumber(value) {
+  if (Number.isInteger(value)) {
+    return value.toLocaleString("vi-VN");
+  }
+  return value.toLocaleString("vi-VN", {
+    maximumFractionDigits: 2,
+  });
+}
+
+function updateHalfLife() {
+  if (!initialN || !timeT || !periodT || !halfLifeResult) {
+    return;
+  }
+  const n0 = Number(initialN.value);
+  const t = Number(timeT.value);
+  const period = Number(periodT.value);
+
+  if (n0 <= 0 || t < 0 || period <= 0) {
+    halfLifeResult.textContent = "Nhập số liệu hợp lệ";
+    return;
+  }
+
+  const remaining = n0 * Math.pow(0.5, t / period);
+  halfLifeResult.textContent = `N = ${formatNumber(remaining)} hạt`;
+}
+
+[initialN, timeT, periodT].forEach((input) => {
+  if (input) {
+    input.addEventListener("input", updateHalfLife);
+  }
+});
+
+updateHalfLife();
+
+const filters = document.querySelectorAll(".filter");
+const mediaCards = document.querySelectorAll(".media-card");
+
+filters.forEach((filter) => {
+  filter.addEventListener("click", () => {
+    const kind = filter.dataset.filter;
+    filters.forEach((item) => item.classList.toggle("active", item === filter));
+    mediaCards.forEach((card) => {
+      const shouldShow = kind === "all" || card.dataset.kind === kind;
+      card.style.display = shouldShow ? "" : "none";
+    });
+  });
+});
+
+const quizForm = document.getElementById("quizForm");
+const quizResult = document.getElementById("quizResult");
+
+function clearQuizState() {
+  document.querySelectorAll(".quiz-card").forEach((card) => {
+    card.classList.remove("correct", "incorrect", "revealed");
+  });
+  if (quizResult) {
+    quizResult.textContent = "Chưa chấm điểm";
+  }
+}
+
+if (quizForm) {
+  quizForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const cards = Array.from(quizForm.querySelectorAll(".quiz-card"));
+    let score = 0;
+
+    cards.forEach((card, index) => {
+      const answer = card.dataset.answer;
+      const selected = quizForm.querySelector(`input[name="q${index + 1}"]:checked`);
+      const isCorrect = selected && selected.value === answer;
+      if (isCorrect) {
+        score += 1;
+      }
+      card.classList.toggle("correct", Boolean(isCorrect));
+      card.classList.toggle("incorrect", Boolean(selected && !isCorrect));
+      card.classList.add("revealed");
+    });
+
+    const total = cards.length;
+    const percent = Math.round((score / total) * 100);
+    quizResult.textContent = `Bạn đạt ${score}/${total} câu đúng (${percent}%).`;
+  });
+
+  quizForm.addEventListener("reset", () => {
+    window.setTimeout(clearQuizState, 0);
+  });
+}
+
+document.querySelectorAll(".play-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    const card = button.closest(".media-card");
+    const title = card ? card.querySelector("h3").textContent : "Video";
+    button.textContent = "Đang phát";
+    button.setAttribute("aria-label", `${title} đang phát`);
+    window.setTimeout(() => {
+      button.textContent = "Play";
+      button.setAttribute("aria-label", `Phát ${title}`);
+    }, 1800);
+  });
+});
+
+const revealItems = document.querySelectorAll(
+  ".lesson-card, .application-card, .safety-card, .media-card, .timeline article, .quiz-card"
+);
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.12,
+  }
+);
+
+revealItems.forEach((item) => {
+  item.classList.add("reveal-item");
+  revealObserver.observe(item);
+});
+
+const style = document.createElement("style");
+style.textContent = `
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 500ms ease, transform 500ms ease;
+  }
+  .reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+document.head.appendChild(style);
+
+const glossary = [
+  {
+    term: "Nuclon",
+    meaning: "Tên gọi chung của proton và nơtron trong hạt nhân.",
+  },
+  {
+    term: "Số khối",
+    meaning: "Tổng số proton và nơtron của một hạt nhân.",
+  },
+  {
+    term: "Bán rã",
+    meaning: "Quá trình lượng hạt nhân phóng xạ giảm còn một nửa sau một khoảng thời gian đặc trưng.",
+  },
+  {
+    term: "Độ hụt khối",
+    meaning: "Phần khối lượng chênh lệch chuyển thành năng lượng liên kết hạt nhân.",
+  },
+];
+
+function createGlossaryPanel() {
+  const section = document.getElementById("basic");
+  if (!section) {
+    return;
+  }
+
+  const panel = document.createElement("aside");
+  panel.className = "glossary-panel";
+  panel.setAttribute("aria-label", "Bảng thuật ngữ");
+  panel.innerHTML = `
+    <button class="glossary-toggle" type="button">Thuật ngữ</button>
+    <div class="glossary-content" hidden>
+      <strong>Bảng thuật ngữ</strong>
+      ${glossary
+        .map(
+          (item) => `
+            <article>
+              <h4>${item.term}</h4>
+              <p>${item.meaning}</p>
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+
+  document.body.appendChild(panel);
+
+  const toggle = panel.querySelector(".glossary-toggle");
+  const content = panel.querySelector(".glossary-content");
+  toggle.addEventListener("click", () => {
+    const isHidden = content.hasAttribute("hidden");
+    if (isHidden) {
+      content.removeAttribute("hidden");
+    } else {
+      content.setAttribute("hidden", "");
+    }
+  });
+
+  const glossaryStyle = document.createElement("style");
+  glossaryStyle.textContent = `
+    .glossary-panel {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 40;
+      max-width: min(360px, calc(100vw - 36px));
+    }
+    .glossary-toggle {
+      min-height: 44px;
+      padding: 0 16px;
+      color: #fff;
+      font-weight: 900;
+      background: #005b60;
+      border: 0;
+      border-radius: 8px;
+      box-shadow: 0 12px 24px rgba(0, 91, 96, 0.24);
+      cursor: pointer;
+    }
+    .glossary-content {
+      margin-top: 8px;
+      padding: 16px;
+      background: #fff;
+      border: 1px solid #dce7e2;
+      border-radius: 8px;
+      box-shadow: 0 18px 50px rgba(20, 44, 42, 0.12);
+    }
+    .glossary-content article {
+      padding-top: 10px;
+      border-top: 1px solid #dce7e2;
+    }
+    .glossary-content h4 {
+      margin: 0 0 4px;
+    }
+    .glossary-content p {
+      margin: 0 0 10px;
+      color: #65726f;
+      font-size: 14px;
+    }
+  `;
+  document.head.appendChild(glossaryStyle);
+}
+
+createGlossaryPanel();
+
+</script>
+</body>
+</html>
